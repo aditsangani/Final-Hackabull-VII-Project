@@ -1,0 +1,46 @@
+# .gitignore for PostureAI Extension
+
+# Node modules (root + nested workspaces)
+node_modules/
+**/node_modules/
+
+# Build output (root + nested apps/packages)
+dist/
+**/dist/
+build/
+**/build/
+.vite/
+**/.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+*.zip
+*.tar.gz
+*.tgz
+
+# Environment files
+.env
+.env.*
+
+# Coverage
+coverage/
+**/coverage/
+
+# Optional: lock files (if you want to ignore them)
+# package-lock.json
+yarn.lock
+pnpm-lock.yaml
