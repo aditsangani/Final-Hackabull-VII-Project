@@ -149,7 +149,7 @@ export default function Dashboard() {
         {settings.showLiveAngle && cameraStarted && angle && (
           <div className="text-center mt-2">
             <div className={`text-[24px] font-medium font-mono ${angleColor}`}>{angle}°</div>
-            <div className="text-[10px] text-gray-400">Ear → shoulder → hip</div>
+            <div className="text-[10px] text-gray-400">Ear → shoulder → neck</div>
           </div>
         )}
       </div>

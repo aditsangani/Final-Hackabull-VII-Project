@@ -269,7 +269,7 @@ export default function Calibrate() {
         <div className="text-[13px] font-medium text-gray-900">Tips for best results</div>
         {[
           ['Sit in the chair you use most', 'Different chairs change your natural posture angle'],
-          ['Keep your full upper body in frame', 'Ear, shoulder, and hip must all be visible'],
+          ['Keep your full upper body in frame', 'Ear, shoulder, and neck points must be visible'],
           ['Sit naturally — not artificially straight', 'Your baseline should be sustainable, not forced'],
         ].map(([t, s], i) => (
           <div key={t} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">

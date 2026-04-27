@@ -31,7 +31,7 @@ PostureGuard is a Chrome/Edge browser extension that uses MediaPipe and AI to mo
 
 ## How It Works
 
-- Uses MediaPipe Pose to calculate the ear → shoulder → hip angle.
+- Uses MediaPipe Pose to calculate the ear → shoulder → neck angle.
 - Good posture: ≥ 165° (blue zone)
 - Warning: 150–165°
 - Tech neck alert: < 150°

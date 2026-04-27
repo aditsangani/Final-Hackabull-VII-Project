@@ -126,7 +126,7 @@ export default function Settings() {
       {/* Posture Thresholds */}
       <Section title="Posture thresholds">
         <div className="bg-blue-50 rounded-lg px-3 py-2.5 text-[12px] text-blue-700 mb-1">
-          Ear → shoulder → hip angle. Higher = more upright. Your calibrated baseline determines what's "good" for your body.
+          Ear → shoulder → neck angle. Higher = more upright. Your calibrated baseline determines what's "good" for your body.
         </div>
         <SliderRow
           label="Good posture threshold"

@@ -12,16 +12,30 @@ export function useMediaPipe({ enabled = true, onResults } = {}) {
   const [landmarks, setLandmarks] = useState(null)
   const [postureLabel, setPostureLabel] = useState(null)
 
-  const calcAngle = (ear, shoulder, hip) => {
-    if (!ear || !shoulder || !hip) return null
+  const calcAngle = (ear, shoulder, neck) => {
+    if (!ear || !shoulder || !neck) return null
     const v1 = { x: ear.x - shoulder.x, y: ear.y - shoulder.y }
-    const v2 = { x: hip.x - shoulder.x, y: hip.y - shoulder.y }
+    const v2 = { x: neck.x - shoulder.x, y: neck.y - shoulder.y }
     const dot = v1.x * v2.x + v1.y * v2.y
     const mag1 = Math.sqrt(v1.x ** 2 + v1.y ** 2)
     const mag2 = Math.sqrt(v2.x ** 2 + v2.y ** 2)
     if (mag1 === 0 || mag2 === 0) return null
     const cos = Math.max(-1, Math.min(1, dot / (mag1 * mag2)))
     return Math.round((Math.acos(cos) * 180) / Math.PI)
+  }
+
+  const calcNeckAngle = (lm) => {
+    if (!lm) return null
+    const neck = {
+      x: (lm[11].x + lm[12].x) / 2,
+      y: (lm[11].y + lm[12].y) / 2,
+    }
+
+    const right = calcAngle(lm[8], lm[12], neck)
+    const left = calcAngle(lm[7], lm[11], neck)
+    const values = [right, left].filter((v) => v !== null)
+    if (!values.length) return null
+    return Math.round(values.reduce((sum, v) => sum + v, 0) / values.length)
   }
 
   const getLabel = (a, thresholds) => {
@@ -50,7 +64,7 @@ export function useMediaPipe({ enabled = true, onResults } = {}) {
       rightHip: toC(lm[24]),
     }
 
-    const label = getLabel(calcAngle(lm[8], lm[12], lm[24]), thresholds)
+    const label = getLabel(calcNeckAngle(lm), thresholds)
     const color = label === 'good' ? '#185FA5' : label === 'warn' ? '#F59E0B' : '#EF4444'
 
     const connections = [
@@ -117,7 +131,7 @@ export function useMediaPipe({ enabled = true, onResults } = {}) {
       pose.onResults((results) => {
         const lm = results.poseLandmarks
         if (lm) {
-          const a = calcAngle(lm[8], lm[12], lm[24])
+          const a = calcNeckAngle(lm)
           const label = getLabel(a, thresholds)
           setAngle(a)
           setLandmarks(lm)
