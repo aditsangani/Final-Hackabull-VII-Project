@@ -1,8 +1,8 @@
-// PostureAI Background Service Worker
+// PostureGuard Background Service Worker
 // Handles notifications and storing posture session data
 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('PostureAI installed')
+  console.log('PostureGuard installed')
   // Set default settings
   chrome.storage.local.get('settings', (data) => {
     if (!data.settings) {
@@ -44,7 +44,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.notifications.create({
           type: 'basic',
           iconUrl: 'icons/icon48.png',
-          title: 'PostureAI — Tech Neck Alert',
+          title: 'PostureGuard — Tech Neck Alert',
           message: `Your posture angle dropped to ${message.angle}°. Time for a 30-second reset.`,
           priority: 1,
         })
@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.notifications.create({
           type: 'basic',
           iconUrl: 'icons/icon48.png',
-          title: 'PostureAI — Streak Milestone! 🔥',
+          title: 'PostureGuard — Streak Milestone! 🔥',
           message: message.text,
           priority: 1,
         })

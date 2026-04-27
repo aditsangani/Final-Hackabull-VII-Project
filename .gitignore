@@ -1,4 +1,4 @@
-# .gitignore for PostureAI Extension
+# .gitignore for PostureGuard Extension
 
 # Node modules (root + nested workspaces)
 node_modules/

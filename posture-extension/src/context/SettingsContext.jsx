@@ -36,7 +36,7 @@ export function SettingsProvider({ children }) {
       })
     } else {
       try {
-        const saved = localStorage.getItem('posture-ai-settings')
+        const saved = localStorage.getItem('posture-guard-settings')
         if (saved) setSettings({ ...defaultSettings, ...JSON.parse(saved) })
       } catch {}
       setLoaded(true)
@@ -49,7 +49,7 @@ export function SettingsProvider({ children }) {
       if (typeof chrome !== 'undefined' && chrome.storage) {
         chrome.storage.local.set({ settings: next })
       } else {
-        localStorage.setItem('posture-ai-settings', JSON.stringify(next))
+        localStorage.setItem('posture-guard-settings', JSON.stringify(next))
       }
       return next
     })
@@ -60,7 +60,7 @@ export function SettingsProvider({ children }) {
     if (typeof chrome !== 'undefined' && chrome.storage) {
       chrome.storage.local.set({ settings: defaultSettings })
     } else {
-      localStorage.setItem('posture-ai-settings', JSON.stringify(defaultSettings))
+      localStorage.setItem('posture-guard-settings', JSON.stringify(defaultSettings))
     }
   }
 

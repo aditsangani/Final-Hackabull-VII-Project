@@ -1,7 +1,7 @@
 
-# PostureAI — Real-Time Posture Monitoring Extension
+# PostureGuard — Real-Time Posture Monitoring Extension
 
-PostureAI is a Chrome/Edge browser extension that uses MediaPipe and AI to monitor your posture in real time, helping you prevent tech neck and improve your well-being while working at your computer.
+PostureGuard is a Chrome/Edge browser extension that uses MediaPipe and AI to monitor your posture in real time, helping you prevent tech neck and improve your well-being while working at your computer.
 
 ## Features
 
@@ -26,7 +26,7 @@ PostureAI is a Chrome/Edge browser extension that uses MediaPipe and AI to monit
    - Click Load unpacked and select the `dist/` folder
 
 3. Grant Camera Access
-   - Click the PostureAI icon in your toolbar
+   - Click the PostureGuard icon in your toolbar
    - Allow camera access when prompted
 
 ## How It Works

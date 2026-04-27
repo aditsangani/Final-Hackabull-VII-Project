@@ -22,7 +22,7 @@ export default function Sidebar({ active, onNav }) {
     <aside className="w-[160px] bg-white border-r border-blue-100 flex flex-col py-4 px-2.5 shrink-0">
       <div className="flex items-center gap-2 px-2 mb-5">
         <div className="w-2 h-2 rounded-full bg-blue-600" />
-        <span className="text-[14px] font-medium text-gray-900 tracking-tight">PostureAI</span>
+        <span className="text-[14px] font-medium text-gray-900 tracking-tight">PostureGuard</span>
       </div>
       <nav className="flex flex-col gap-0.5 flex-1">
         {navItems.map(item => (

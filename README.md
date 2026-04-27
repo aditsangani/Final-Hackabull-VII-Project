@@ -28,7 +28,7 @@ PostureGuard is a browser extension for Chrome and Edge that uses AI and MediaPi
 	- Go to `chrome://extensions/` or `edge://extensions/`
 	- Enable Developer mode
 	- Click Load unpacked and select the `dist/` folder
-4. Click the PostureAI icon and allow camera access when prompted
+4. Click the PostureGuard icon and allow camera access when prompted
 
 ## Project Structure
 

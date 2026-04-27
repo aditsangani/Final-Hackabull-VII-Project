@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "PostureAI",
+  "name": "PostureGuard",
   "version": "1.0.0",
   "description": "Real-time posture monitoring using MediaPipe.",
   "action": {
