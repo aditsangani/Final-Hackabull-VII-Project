@@ -12,10 +12,10 @@ export function useMediaPipe({ enabled = true, onResults } = {}) {
   const [landmarks, setLandmarks] = useState(null)
   const [postureLabel, setPostureLabel] = useState(null)
 
-  const calcAngle = (ear, shoulder, neck) => {
-    if (!ear || !shoulder || !neck) return null
+  const calcAngle = (ear, shoulder, torsoRef) => {
+    if (!ear || !shoulder || !torsoRef) return null
     const v1 = { x: ear.x - shoulder.x, y: ear.y - shoulder.y }
-    const v2 = { x: neck.x - shoulder.x, y: neck.y - shoulder.y }
+    const v2 = { x: torsoRef.x - shoulder.x, y: torsoRef.y - shoulder.y }
     const dot = v1.x * v2.x + v1.y * v2.y
     const mag1 = Math.sqrt(v1.x ** 2 + v1.y ** 2)
     const mag2 = Math.sqrt(v2.x ** 2 + v2.y ** 2)
@@ -26,13 +26,35 @@ export function useMediaPipe({ enabled = true, onResults } = {}) {
 
   const calcNeckAngle = (lm) => {
     if (!lm) return null
-    const neck = {
-      x: (lm[11].x + lm[12].x) / 2,
-      y: (lm[11].y + lm[12].y) / 2,
+
+    const isReliable = (pt) => pt && (typeof pt.visibility !== 'number' || pt.visibility >= 0.35)
+
+    const syntheticTorsoRef = (shoulder, leftShoulder, rightShoulder) => {
+      if (!shoulder || !leftShoulder || !rightShoulder) return null
+      const shoulderVec = {
+        x: rightShoulder.x - leftShoulder.x,
+        y: rightShoulder.y - leftShoulder.y,
+      }
+      const shoulderWidth = Math.hypot(shoulderVec.x, shoulderVec.y) || 0.2
+
+      // Perpendicular to shoulder line approximates up/down torso direction.
+      const normal = { x: -shoulderVec.y, y: shoulderVec.x }
+      const normalMag = Math.hypot(normal.x, normal.y)
+      if (!normalMag) return null
+
+      const unit = { x: normal.x / normalMag, y: normal.y / normalMag }
+      const down = unit.y >= 0 ? unit : { x: -unit.x, y: -unit.y }
+      return {
+        x: shoulder.x + down.x * shoulderWidth,
+        y: shoulder.y + down.y * shoulderWidth,
+      }
     }
 
-    const right = calcAngle(lm[8], lm[12], neck)
-    const left = calcAngle(lm[7], lm[11], neck)
+    const rightRef = isReliable(lm[24]) ? lm[24] : syntheticTorsoRef(lm[12], lm[11], lm[12])
+    const leftRef = isReliable(lm[23]) ? lm[23] : syntheticTorsoRef(lm[11], lm[11], lm[12])
+
+    const right = calcAngle(lm[8], lm[12], rightRef)
+    const left = calcAngle(lm[7], lm[11], leftRef)
     const values = [right, left].filter((v) => v !== null)
     if (!values.length) return null
     return Math.round(values.reduce((sum, v) => sum + v, 0) / values.length)
