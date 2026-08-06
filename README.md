@@ -1,6 +1,8 @@
 
 # PostureGuard — Browser Extension for Posture Monitoring (Hackathon Winner)
 
+DevPost: https://devpost.com/software/posture-guard-0e57p6
+
 PostureGuard is a browser extension for Chrome and Edge that uses AI and MediaPipe to monitor your posture in real time. Built for HackaBull VII, this project aims to help users maintain healthy posture and prevent tech neck while working at their computers.
 
 ## Features
